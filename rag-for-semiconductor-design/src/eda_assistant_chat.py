@@ -42,7 +42,6 @@ check_region = eda_assistant_bedrock_api.check_bedrock_region()
 if eda_assistant_arg.args.webui: 
     st.set_page_config(page_title="EDA Engineering Assistant", page_icon=":trackball:", initial_sidebar_state="auto")
     st.header(":trackball: EDA Engineering Assistant")
-    st.subheader("Ask questions pertaining to Digital Design, Analog design, EDA Software Tools")
     ref_urls = []
     
     # Sidebar User Settings
@@ -68,11 +67,11 @@ if eda_assistant_arg.args.webui:
     if 'temperature' not in st.session_state:
         st.session_state['temperature'] = eda_assistant_arg.args.temperature
     
-    if 'kbid_input' not in st.session_state:
-        st.session_state['kbid_input'] = ""
+    #if 'kbid_input' not in st.session_state:
+    #    st.session_state['kbid_input'] = ""
 
     # Create a single-select dropdown
-    selected_option = st.sidebar.selectbox("Select a model:", ["anthropic.claude-3-haiku-20240307-v1:0", "anthropic.claude-3-sonnet-20240229-v1:0", "anthropic.claude-instant-v1", "anthropic.claude-v2"])
+    selected_option = st.sidebar.selectbox("Select a model:", ["anthropic.claude-3-haiku-20240307-v1:0", "anthropic.claude-3-sonnet-20240229-v1:0", "anthropic.claude-instant-v1", "anthropic.claude-v2","anthropic.claude-3-opus-20240229-v1:0"])
     st.write("You selected:", selected_option)
 
     # Create a model query approach: RAG or Base FM
@@ -82,10 +81,11 @@ if eda_assistant_arg.args.webui:
     #Select Knowledge Base 
     kbid = st.sidebar.text_input(
         "Please enter Knowledge Base ID 👇",
+        "AHH2SQ7TFU",
         label_visibility=st.session_state.visibility,
         disabled=st.session_state.disabled,
-        key= "kbid_input"
-    )
+        key= "kbid_input",
+    )    
 
     if st.session_state.kbid_input != "":
         print("-I- Selected KBID: ", kbid)
